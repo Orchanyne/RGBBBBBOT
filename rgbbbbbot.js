@@ -24,16 +24,8 @@ client.on("message", (message) => {
         const rgbEmbed = new Discord.MessageEmbed()
             .setTitle("RGB STARTED !!!")
 
-        message.channel.send(rgbEmbed);
-
-        for(let i=0;i<500;i++) {
-            var rgb1 = getRandomInt(256);
-            var rgb2 = getRandomInt(256);
-            var rgb3 = getRandomInt(256);
-            userRole.setColor(RgbToHex("rgb("+rgb1+","+rgb2+","+rgb3+")"));
-
-        }
-
+        //message.channel.send(rgbEmbed);
+        myLoop(userRole);
     }
 
     //Récupération du role sur lequel mettre en place le changement de couleur
@@ -80,9 +72,29 @@ client.on("message", (message) => {
 
 });
 
+
+
+                  //  start the loop
+
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
+
+var boucleRequete = 1;
+
+function myLoop(userRole) {
+  setTimeout(function() {
+    var rgb1 = getRandomInt(256);
+    var rgb2 = getRandomInt(256);
+    var rgb3 = getRandomInt(256);
+    userRole.setColor(RgbToHex("rgb("+rgb1+","+rgb2+","+rgb3+")"));
+    boucleRequete++;
+    if (boucleRequete < 500) {
+      myLoop(userRole);
+    }
+  }, 750)
+}
+
 var RgbToHex = function (string) {
     if( /rgba?\(0,0,0,0\)/.test(string.replace(new RegExp(' ', 'g'), '')) ){
         return "transparent";
