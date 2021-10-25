@@ -89,7 +89,7 @@ function myLoop(userRole) {
     var rgb3 = getRandomInt(256);
     userRole.setColor(RgbToHex("rgb("+rgb1+","+rgb2+","+rgb3+")"));
     boucleRequete++;
-    if (boucleRequete < 500) {
+    if (boucleRequete < 50000) {
       myLoop(userRole);
     }
   }, 750)
